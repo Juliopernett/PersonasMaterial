@@ -10,4 +10,8 @@
     <string name="mensaje">Persona guardada exitosamente</string>
     <string name="eliminar">eliminar</string>
     <string name="titulo_detalle">Información de la persona</string>
+    <string name="titulo_eliminar">Eliminar persona</string>
+    <string name="positivo">Si</string>
+    <string name="negativo">No</string>
+    <string name="mensaje_eliminar">¿Seguro que desea eliminar esta persona?</string>
 </resources>
