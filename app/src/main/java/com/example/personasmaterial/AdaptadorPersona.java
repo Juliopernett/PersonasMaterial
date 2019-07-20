@@ -12,9 +12,11 @@ import java.util.ArrayList;
 
 public class AdaptadorPersona extends  RecyclerView.Adapter<AdaptadorPersona.PersonaViewHolder> {
     private ArrayList<Persona> personas;
+    private  OnPersonaClickListener clickListener;
 
-    public  AdaptadorPersona(ArrayList<Persona>personas){
+    public  AdaptadorPersona(ArrayList<Persona>personas, OnPersonaClickListener clickListener){
         this.personas=personas;
+        this.clickListener=clickListener;
     }
 
     @Override
@@ -26,10 +28,18 @@ public class AdaptadorPersona extends  RecyclerView.Adapter<AdaptadorPersona.Per
 
     @Override
     public void onBindViewHolder(@NonNull PersonaViewHolder personaViewHolder, int i) {
-        Persona p = personas.get(i);
+        final Persona p = personas.get(i);
         personaViewHolder.foto.setImageResource(p.getFoto());
         personaViewHolder.nombre.setText(p.getNombre());
         personaViewHolder.apellido.setText(p.getApellido());
+
+        PersonaViewHolder.v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickListener.onPersonaClick(p);
+
+            }
+        });
     }
 
     @Override
@@ -38,10 +48,11 @@ public class AdaptadorPersona extends  RecyclerView.Adapter<AdaptadorPersona.Per
     }
 
     public static class PersonaViewHolder extends RecyclerView.ViewHolder{
+        public static View v;
         private ImageView foto;
         private TextView nombre;
         private TextView apellido;
-        private View v;
+
 
         public  PersonaViewHolder(View itemView){
             super(itemView);
@@ -50,5 +61,9 @@ public class AdaptadorPersona extends  RecyclerView.Adapter<AdaptadorPersona.Per
             nombre = v.findViewById(R.id.lblNombre);
             apellido = v.findViewById(R.id.lblApellido);
         }
+    }
+    /*hay un evento que tiene que ejecutarse obligatoriamente*/
+    public interface  OnPersonaClickListener{
+         void onPersonaClick (Persona p);
     }
 }
